@@ -5,7 +5,7 @@ include FHIRHelpers version '4.0.0'
 context Patient
 
 define HasGender:
-  not Patient.gender.exists()
+   Patient.gender.exists()
 
 define InInitialPopulation:
   HasGender
