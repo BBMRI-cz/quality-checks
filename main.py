@@ -8,8 +8,8 @@ def main():
     # Parse command-line arguments
     args = parse_args()
 
-    # Generate report
-    results = generate_report(args.directory, args.base, args.subject_type, args.report_type, args.epsilon)
+    # Generate report with composability accounting
+    results = generate_report(args.directory, args.base, args.subject_type, args.report_type, args.epsilon, args.total_epsilon)
 
     # Output results as JSON
     print(json.dumps(results, indent=2))
