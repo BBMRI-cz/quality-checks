@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Data Quality Check Report</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 20px; }
+h1 { color: #333; margin-bottom: 5px; }
+h2 { color: #555; margin-top: 0; margin-bottom: 20px; font-weight: normal; }
+.qc-block { border-radius: 5px; margin-bottom: 15px; padding: 15px; background-color: #eee; }
+.description { font-style: italic; color: #555; margin-bottom: 10px; }
+.header { font-weight: bold; font-size: 1.1em; margin-bottom: 5px; }
+</style>
+</head>
+<body>
+<h1>Data Quality Check Report</h1>
+        <h2>Total Patients: 1000 | Total Epsilon Used: 5.00</h2>
+        
+            <div class="qc-block" style="background-color:#ccffcc;">
+            <div class="header">accuracy-1.cql</div>
+            <div class='description'>Checks for incompatible diagnosis with the Gender of the Patient</div>
+            <div>Count: 1 (0.10%)</div>
+            <div>Count with Differential Privacy: 1 (0.10%)</div>
+            <div>Epsilon Used: 0.5</div>
+</div>
+            
+            <div class="qc-block" style="background-color:#ccffcc;">
+            <div class="header">accuracy-2.cql</div>
+            <div class='description'>Checks for birth dates before 1900 or in the future</div>
+            <div>Count: 0 (0.00%)</div>
+            <div>Count with Differential Privacy: 1 (0.10%)</div>
+            <div>Epsilon Used: 0.5</div>
+</div>
+            
+            <div class="qc-block" style="background-color:#ccffcc;">
+            <div class="header">timeliness-1.cql</div>
+            <div class='description'>Unknown</div>
+            <div>Count: 0 (0.00%)</div>
+            <div>Count with Differential Privacy: 0 (0.00%)</div>
+            <div>Epsilon Used: 0.5</div>
+</div>
+            
+            <div class="qc-block" style="background-color:#ccffcc;">
+            <div class="header">consistency-1.cql</div>
+            <div class='description'>How many patients do not have supported gender value</div>
+            <div>Count: 2 (0.20%)</div>
+            <div>Count with Differential Privacy: 6 (0.60%)</div>
+            <div>Epsilon Used: 0.5</div>
+</div>
+            
+            <div class="qc-block" style="background-color:#ccffcc;">
+            <div class="header">completness-2.cql</div>
+            <div class='description'>How many patients do not have a diagnosis</div>
+            <div>Count: 1 (0.10%)</div>
+            <div>Count with Differential Privacy: 1 (0.10%)</div>
+            <div>Epsilon Used: 0.5</div>
+</div>
+            
+            <div class="qc-block" style="background-color:#ccffcc;">
+            <div class="header">completness-1.cql</div>
+            <div class='description'>How many patients have the Gender attribute</div>
+            <div>Count: 2 (0.20%)</div>
+            <div>Count with Differential Privacy: 3 (0.30%)</div>
+            <div>Epsilon Used: 0.5</div>
+</div>
+            
+            <div class="qc-block" style="background-color:#ccffcc;">
+            <div class="header">uniqness-1</div>
+            <div class='description'>Duplicate patients</div>
+            <div>Count: 2 (0.20%)</div>
+            <div>Count with Differential Privacy: 3 (0.30%)</div>
+            <div>Epsilon Used: 0.5</div>
+</div>
+            
+            <div class="qc-block" style="background-color:#ffcccc;">
+            <div class="header">validity-1</div>
+            <div class='description'>How many conditions have invalid ICD-10 codes</div>
+            <div>Count: 977 (97.70%)</div>
+            <div>Count with Differential Privacy: 977 (97.70%)</div>
+            <div>Epsilon Used: 0.5</div>
+</div>
+            
+            <div class="qc-block" style="background-color:#ffcccc;">
+            <div class="header">validity-2</div>
+            <div class='description'>How many Specimens have invalid ICD-10 diagnoses</div>
+            <div>Count: 996 (99.60%)</div>
+            <div>Count with Differential Privacy: 996 (99.60%)</div>
+            <div>Epsilon Used: 0.5</div>
+</div>
+            
+            <div class="qc-block" style="background-color:#ccffcc;">
+            <div class="header">timeliness-1</div>
+            <div class='description'>How many patients were last updated more than a year ago</div>
+            <div>Count: 0 (0.00%)</div>
+            <div>Count with Differential Privacy: 0 (0.00%)</div>
+            <div>Epsilon Used: 0.5</div>
+</div>
+            
+</body>
+</html>
+    
