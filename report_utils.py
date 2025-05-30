@@ -190,7 +190,7 @@ class InvalidConditionICDCheck(QualityCheck):
 class SurvivalRateCheck(QualityCheck):
     """Check average survival rate, stratified by gender (male vs. female)."""
     def __init__(self, epsilon=1.0):
-        super().__init__("SurvivalRateCheck", "Survival rate",epsilon)
+        super().__init__("accuracy-3", "What is the survival rate for different gender values",epsilon)
         self.genders = ["male", "female"]
 
     def execute(self, base_url, subject_type, report_type):

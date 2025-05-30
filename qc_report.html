@@ -22,16 +22,16 @@ h2 { color: #555; margin-top: 0; margin-bottom: 20px; font-weight: normal; }
                 <div class="qc-block" style="background-color:#ccffcc;">
                 <div class="header">accuracy-1.cql</div>
                 <div class='description'>Checks for incompatible diagnosis with the Gender of the Patient</div>
-                <div>Count: 0 (0.00%)</div>
-                <div>Count with Differential Privacy: 0 (0.00%)</div>
+                <div>Count: 1 (0.10%)</div>
+                <div>Count with Differential Privacy: 5 (0.50%)</div>
                 <div>Epsilon Used: 0.5</div>
 </div>
                 
-                <div class="qc-block" style="background-color:#ccffcc;">
+                <div class="qc-block" style="background-color:#fff2cc;">
                 <div class="header">accuracy-2.cql</div>
                 <div class='description'>Checks for birth dates before 1900 or in the future</div>
-                <div>Count: 0 (0.00%)</div>
-                <div>Count with Differential Privacy: 0 (0.00%)</div>
+                <div>Count: 56 (5.60%)</div>
+                <div>Count with Differential Privacy: 57 (5.70%)</div>
                 <div>Epsilon Used: 0.5</div>
 </div>
                 
@@ -39,7 +39,7 @@ h2 { color: #555; margin-top: 0; margin-bottom: 20px; font-weight: normal; }
                 <div class="header">timeliness-1.cql</div>
                 <div class='description'>Unknown</div>
                 <div>Count: 0 (0.00%)</div>
-                <div>Count with Differential Privacy: 3 (0.30%)</div>
+                <div>Count with Differential Privacy: 4 (0.40%)</div>
                 <div>Epsilon Used: 0.5</div>
 </div>
                 
@@ -47,7 +47,7 @@ h2 { color: #555; margin-top: 0; margin-bottom: 20px; font-weight: normal; }
                 <div class="header">consistency-1.cql</div>
                 <div class='description'>How many patients do not have supported gender value</div>
                 <div>Count: 96 (9.60%)</div>
-                <div>Count with Differential Privacy: 98 (9.80%)</div>
+                <div>Count with Differential Privacy: 94 (9.40%)</div>
                 <div>Epsilon Used: 0.5</div>
 </div>
                 
@@ -55,7 +55,7 @@ h2 { color: #555; margin-top: 0; margin-bottom: 20px; font-weight: normal; }
                 <div class="header">completness-2.cql</div>
                 <div class='description'>How many patients do not have a diagnosis</div>
                 <div>Count: 200 (20.00%)</div>
-                <div>Count with Differential Privacy: 200 (20.00%)</div>
+                <div>Count with Differential Privacy: 198 (19.80%)</div>
                 <div>Epsilon Used: 0.5</div>
 </div>
                 
@@ -63,7 +63,7 @@ h2 { color: #555; margin-top: 0; margin-bottom: 20px; font-weight: normal; }
                 <div class="header">completness-1.cql</div>
                 <div class='description'>How many patients do not have the Gender attribute</div>
                 <div>Count: 37 (3.70%)</div>
-                <div>Count with Differential Privacy: 37 (3.70%)</div>
+                <div>Count with Differential Privacy: 35 (3.50%)</div>
                 <div>Epsilon Used: 0.5</div>
 </div>
                 
@@ -71,7 +71,7 @@ h2 { color: #555; margin-top: 0; margin-bottom: 20px; font-weight: normal; }
                 <div class="header">uniqness-1</div>
                 <div class='description'>Duplicate patients</div>
                 <div>Count: 97 (9.70%)</div>
-                <div>Count with Differential Privacy: 98 (9.80%)</div>
+                <div>Count with Differential Privacy: 92 (9.20%)</div>
                 <div>Epsilon Used: 0.5</div>
 </div>
                 
@@ -79,7 +79,7 @@ h2 { color: #555; margin-top: 0; margin-bottom: 20px; font-weight: normal; }
                 <div class="header">validity-1</div>
                 <div class='description'>How many conditions have invalid ICD-10 codes</div>
                 <div>Count: 966 (96.60%)</div>
-                <div>Count with Differential Privacy: 964 (96.40%)</div>
+                <div>Count with Differential Privacy: 969 (96.90%)</div>
                 <div>Epsilon Used: 0.5</div>
 </div>
                 
@@ -95,7 +95,7 @@ h2 { color: #555; margin-top: 0; margin-bottom: 20px; font-weight: normal; }
                 <div class="header">timeliness-1</div>
                 <div class='description'>How many patients were last updated more than a year ago</div>
                 <div>Count: 0 (0.00%)</div>
-                <div>Count with Differential Privacy: 7 (0.70%)</div>
+                <div>Count with Differential Privacy: 0 (0.00%)</div>
                 <div>Epsilon Used: 0.5</div>
 </div>
                 
@@ -103,19 +103,19 @@ h2 { color: #555; margin-top: 0; margin-bottom: 20px; font-weight: normal; }
                 <div class="header">SurvivalRateCheck</div>
                 <div class='description'>Survival rate</div>
                 <div>Alive Count: 662 (Total: 1000, Rate: 66.20%)</div>
-                <div>Alive Count with Differential Privacy: 659 (Rate: 65.90%)</div>
+                <div>Alive Count with Differential Privacy: 669 (Rate: 66.90%)</div>
                 <div>Epsilon Used: 0.5</div>
                 
                     <div class="stratum" style="background-color:#ffcccc;">
                     <div class="stratum-header">Male</div>
                     <div>Alive Count: 309 (Total: 484, Rate: 63.84%)</div>
-                    <div>Alive Count with Differential Privacy: 310 (Rate: 64.05%)</div>
+                    <div>Alive Count with Differential Privacy: 297 (Rate: 61.36%)</div>
 </div>
                     
                     <div class="stratum" style="background-color:#ffcccc;">
                     <div class="stratum-header">Female</div>
                     <div>Alive Count: 276 (Total: 420, Rate: 65.71%)</div>
-                    <div>Alive Count with Differential Privacy: 283 (Rate: 67.38%)</div>
+                    <div>Alive Count with Differential Privacy: 275 (Rate: 65.48%)</div>
 </div>
                     </div>
 </body>

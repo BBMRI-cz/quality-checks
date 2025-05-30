@@ -7,7 +7,7 @@ codesystem icd10: 'http://hl7.org/fhir/sid/icd-10'
 
 // Define specific ICD-10 codes
 code "ProstateCancer": 'C61' from icd10
-code "CervicalCancer": 'C53.9' from icd10
+code "CervicalCancer": 'R80.2' from icd10
 
 context Patient
 
