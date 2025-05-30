@@ -87,7 +87,7 @@ class CQLQualityCheck(QualityCheck):
                     "count": count,
                     "countWithDP": add_laplace_noise(count, self.epsilon),
                     "listReference": list_reference,
-                    "patientIds": patient_ids,
+                    "patientIds": "[]",
                     "epsilonUsed": self.epsilon
                 }
             else:
@@ -136,7 +136,7 @@ class DuplicateIdentifierCheck(QualityCheck):
                 "epsilonUsed": self.epsilon
             }
             if report_type == "subject-list":
-                result["patientIds"] = list(set(duplicate_ids))
+                result["patientIds"] = "[]"
                 #print(f"Duplicate patient IDs for {self.name}: {result['patientIds']}")
             return result
         except Exception as e:
@@ -187,7 +187,78 @@ class InvalidConditionICDCheck(QualityCheck):
         except Exception as e:
             print(f"Error processing {self.name}: {e}")
             return {"error": str(e), "epsilonUsed": 0.0}
+class SurvivalRateCheck(QualityCheck):
+    """Check average survival rate, stratified by gender (male vs. female)."""
+    def __init__(self, epsilon=1.0):
+        super().__init__("SurvivalRateCheck", "Survival rate",epsilon)
+        self.genders = ["male", "female"]
 
+    def execute(self, base_url, subject_type, report_type):
+        try:
+            patients = self._fetch_all_resources(base_url, "Patient", ["id", "gender", "deceased"])
+            epsilon_per_check = self.epsilon / (len(self.genders) + 1)  # Total + stratified
+            results = {"stratified": {}}
+
+            # Total survival rate
+            total_alive = 0
+            total_count = 0
+            total_alive_ids = set()
+            for entry in patients:
+                patient = entry.get("resource", {})
+                patient_id = f"Patient/{patient.get('id')}"
+                deceased = patient.get("deceasedBoolean", False) or patient.get("deceasedDateTime")
+                if not deceased:
+                    total_alive += 1
+                    total_alive_ids.add(patient_id)
+                total_count += 1
+
+            total_rate = total_alive / total_count if total_count > 0 else 0.0
+            total_count_dp = add_laplace_noise(total_alive, epsilon_per_check)
+            total_rate_dp = total_count_dp / total_count if total_count > 0 else 0.0
+            results["countAlive"] = total_alive
+            results["countTotal"] = total_count
+            results["rate"] = total_rate
+            results["countAliveWithDP"] = total_count_dp
+            results["rateWithDP"] = total_rate_dp
+            results["epsilonUsed"] = self.epsilon
+
+            # Stratified by gender
+            for gender in self.genders:
+                gender_alive = 0
+                gender_count = 0
+                gender_alive_ids = set()
+                for entry in patients:
+                    patient = entry.get("resource", {})
+                    if patient.get("gender") == gender:
+                        patient_id = f"Patient/{patient.get('id')}"
+                        deceased = patient.get("deceasedBoolean", False) or patient.get("deceasedDateTime")
+                        if not deceased:
+                            gender_alive += 1
+                            gender_alive_ids.add(patient_id)
+                        gender_count += 1
+
+                gender_rate = gender_alive / gender_count if gender_count > 0 else 0.0
+                gender_count_dp = add_laplace_noise(gender_alive, epsilon_per_check)
+                gender_rate_dp = gender_count_dp / gender_count if gender_count > 0 else 0.0
+                results["stratified"][gender] = {
+                    "countAlive": gender_alive,
+                    "countTotal": gender_count,
+                    "rate": gender_rate,
+                    "countAliveWithDP": gender_count_dp,
+                    "rateWithDP": gender_rate_dp
+                }
+                if report_type == "subject-list":
+                    results["stratified"][gender]["patientIds"] = "[]"
+
+            if report_type == "subject-list":
+                results["patientIds"] = "[]"
+                print(f"Alive patients for {self.name}: {results['patientIds']}")
+                for gender in self.genders:
+                    print(f"Alive {gender} patients: {results['stratified'][gender]['patientIds']}")
+            return results
+        except Exception as e:
+            print(f"Error processing {self.name}: {e}")
+            return {"error": str(e), "epsilonUsed": 0.0}
 class InvalidSpecimenICDCheck(QualityCheck):
     """Check for invalid ICD-10 or ICD-9 codes in Specimen SampleDiagnosis extension."""
     def __init__(self, epsilon=1.0):
@@ -296,7 +367,8 @@ def get_qc_results(directory, base_url, subject_type, report_type, epsilon, tota
         DuplicateIdentifierCheck(epsilon=epsilon),
         InvalidConditionICDCheck(epsilon=epsilon),
         InvalidSpecimenICDCheck(epsilon=epsilon),
-        StalePatientCheck(epsilon=epsilon)
+        StalePatientCheck(epsilon=epsilon),
+        SurvivalRateCheck(epsilon=epsilon)
     ])
 
     for check in quality_checks:
